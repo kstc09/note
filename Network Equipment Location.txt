@@ -1,51 +1,60 @@
-### Chat Log - Network Monitoring Project
+Network Equipment Location - Project Overview
+1. Project Description
+The Network Equipment Location project is a GUI-based network monitoring tool that helps users:
 
-#### Session Start: [Timestamp]
+Monitor network health (Ping & Traceroute)
+Retrieve interface details (SSH)
+Load network structure from an Excel file
+Visualize network topology using graphs
+It is built with Python, leveraging Tkinter, paramiko, subprocess, pandas, and networkx.
 
-#### Summary:
-This document serves as a running log of discussions, feedback, and improvements related to the Network Monitoring & Visualization System.
+2. Project Components
+2.1. main.py - Core GUI Application
+Loads network data from network_devices.xlsx.
+Displays Company → Site → Location → Subnet → Host in a TreeView.
+Implements:
+Search functionality (currently needs better filtering).
+Ping all devices.
+Traceroute for selected devices.
+Network visualization for selected groups.
+Suggestions: ✔️ Improve search filtering (highlight results instead of repopulating the tree).
+✔️ Implement a status indicator for ping results.
 
----
+2.2. data_loader.py - Loading Network Data
+Reads network data from Excel (network_devices.xlsx).
+Parses network hierarchy into a nested dictionary (sorted_network).
+Creates a hostname mapping.
+Suggestions: ✔️ Add error handling for missing columns.
+✔️ Log skipped entries (e.g., invalid IP addresses).
 
-#### Initial Review of Project Files:
-1. **main.py** - Core GUI for network monitoring.
-   - Loads network data.
-   - Displays network hierarchy.
-   - Implements Ping, Traceroute, and Visualization.
-   - Needs better search filtering and error handling.
+2.3. ping_traceroute.py - Network Health Check
+Ping Devices: Uses subprocess.run() to check if a device is online.
+Traceroute: Runs tracert (Windows-only) and updates the tree.
+Suggestions: ✔️ Make traceroute cross-platform (traceroute for Linux).
+✔️ Parallelize traceroute for speed.
+✔️ Handle timeouts & failures gracefully.
 
-2. **data_loader.py** - Imports network data from Excel.
-   - Processes hierarchy: Company > Site > Location > Subnet > IP.
-   - Validates IPs and structures the network.
-   - Needs improved error handling for missing data.
+2.4. interface_manager.py - Network Interface Details
+Uses SSH (paramiko) to connect to a device.
+Runs show interfaces status to retrieve:
+Interface Name
+Status
+VLAN
+Speed
+Displays results in a TreeView.
+Suggestions: ✔️ Handle SSH connection failures properly.
+✔️ Allow custom commands instead of hardcoding show interfaces status.
 
-3. **ping_traceroute.py** - Runs network checks.
-   - Uses subprocess for ping and traceroute.
-   - Windows-only (`tracert`), needs Linux support.
-   - Needs better parallelization.
+2.5. network_visualization.py - Network Graphs
+Uses NetworkX & Matplotlib to visualize network hierarchy.
+Displays nodes for Companies, Sites, Locations, Subnets, Hosts.
+Suggestions: ✔️ Prevent node labels from overlapping.
+✔️ Add color coding (Online = Green, Offline = Red).
 
-4. **interface_manager.py** - Manages network interfaces via SSH.
-   - Connects to devices using paramiko.
-   - Extracts interface details via regex.
-   - Needs SSH failure handling and command configurability.
+3. Next Steps
+1️⃣ Enhance search filtering (highlight results instead of repopulating the tree).
+2️⃣ Improve error handling (SSH, Ping, Excel file parsing).
+3️⃣ Make traceroute cross-platform (tracert for Windows, traceroute for Linux).
+4️⃣ Improve graph visualization (fix overlapping labels, add colors).
+5️⃣ Parallelize network scans (faster ping & traceroute execution).
 
-5. **network_visualization.py** - Creates network graphs.
-   - Uses NetworkX & Matplotlib.
-   - Visualizes hierarchical structure.
-   - Needs better label handling and color coding.
-
----
-
-#### Next Steps & Improvements:
-1. Enhance search functionality to highlight results instead of repopulating.
-2. Add better exception handling in all modules.
-3. Implement cross-platform support for Traceroute.
-4. Improve visualization layout to avoid label overlap.
-5. Optimize parallelization in network checks.
-
----
-
-#### Live Session Log:
-[This section will be continuously updated as we discuss further.]
-
-/.
