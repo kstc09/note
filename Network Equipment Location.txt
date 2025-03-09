@@ -1,0 +1,51 @@
+### Chat Log - Network Monitoring Project
+
+#### Session Start: [Timestamp]
+
+#### Summary:
+This document serves as a running log of discussions, feedback, and improvements related to the Network Monitoring & Visualization System.
+
+---
+
+#### Initial Review of Project Files:
+1. **main.py** - Core GUI for network monitoring.
+   - Loads network data.
+   - Displays network hierarchy.
+   - Implements Ping, Traceroute, and Visualization.
+   - Needs better search filtering and error handling.
+
+2. **data_loader.py** - Imports network data from Excel.
+   - Processes hierarchy: Company > Site > Location > Subnet > IP.
+   - Validates IPs and structures the network.
+   - Needs improved error handling for missing data.
+
+3. **ping_traceroute.py** - Runs network checks.
+   - Uses subprocess for ping and traceroute.
+   - Windows-only (`tracert`), needs Linux support.
+   - Needs better parallelization.
+
+4. **interface_manager.py** - Manages network interfaces via SSH.
+   - Connects to devices using paramiko.
+   - Extracts interface details via regex.
+   - Needs SSH failure handling and command configurability.
+
+5. **network_visualization.py** - Creates network graphs.
+   - Uses NetworkX & Matplotlib.
+   - Visualizes hierarchical structure.
+   - Needs better label handling and color coding.
+
+---
+
+#### Next Steps & Improvements:
+1. Enhance search functionality to highlight results instead of repopulating.
+2. Add better exception handling in all modules.
+3. Implement cross-platform support for Traceroute.
+4. Improve visualization layout to avoid label overlap.
+5. Optimize parallelization in network checks.
+
+---
+
+#### Live Session Log:
+[This section will be continuously updated as we discuss further.]
+
+/.
